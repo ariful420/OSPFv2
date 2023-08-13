@@ -1,1 +1,28 @@
+//Confogure with OSPF
+R3(config)#router ospf 1
+R3(config-router)#network 172.16.1.32 0.0.0.7 area 0 //wildcard mask opposite of subnet mask
+R3(config-router)#network 192.168.10.4 0.0.0.3 area 0
 
+//Configure Loopback Interface
+R1(config)#interface loopback 0 
+R1(config-if)#ip address 10.1.1.1 255.255.255.255
+************************ OSPF Configuration Command *****************************
+//Show the status 
+show ip protocols
+R3#show ip ospf interface
+R3#show ip ospf
+show ip route
+show ip ospf neighbor 
+
+//Modigy the Bandwidth of a link
+R2(config)#interface serial0/0/0
+R2(config-if)#bandwidth 64
+
+//Modify the path cost of a link
+R3(config-if)#interface serial0/0/1
+R3(config-if)#ip ospf cost 1562
+
+//Modify the hello and dead intervel of OSPF protocol
+R2(config)#interface serial0/0/0
+R2(config-if)#ip ospf hello-interval 5
+R2(config-if)#ip ospf dead-interval 20
